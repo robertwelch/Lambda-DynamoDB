@@ -1,0 +1,80 @@
+name: Build and deploy to Lambda
+on: [push, workflow_dispatch]
+jobs:
+  build_and_deploy_api:
+    name: Build and deploy API
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+      
+      - name: Install and build
+        run: |
+          cd api
+          npm install
+      
+      - name: Run test locally
+        run: |
+          cd api
+          npm run start-and-test-local
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+
+      - name: Zip
+        run: |
+          cd api
+          zip -r ../api.zip ./*
+      
+      - name: Deploy
+        uses: appleboy/lambda-action@master
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: ${{ secrets.AWS_REGION }}
+          function_name: ${{ secrets.LAMBDA_FUNCTION_NAME }}
+          zip_file: api.zip
+      
+      - name: Run test remotely
+        run: |
+          cd api2
+          npm run test-remote
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_API_GATEWAY_URL: ${{ secrets.AWS_API_GATEWAY_URL }}
+          AWS_AUTHORIZATION_KEY: ${{ secrets.AWS_AUTHORIZATION_KEY }}
+
+  build_and_deploy_authorizer:
+    name: Build and deploy FinanceTrackerAuthorizer
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+      
+      - name: Install and build
+        run: |
+          cd api
+          npm install
+          npm run build --if-present
+
+      - name: Zip
+        run: |
+          cd authorizer
+          zip -r ../authorizer.zip ./*
+      
+      - name: Deploy
+        uses: appleboy/lambda-action@master
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: ${{ secrets.AWS_REGION }}
+          function_name: FinanceTrackerAuthorizer
+          zip_file: authorizer.zip
+          environment: authorizationKey=${{ secrets.AWS_AUTHORIZATION_KEY }}
