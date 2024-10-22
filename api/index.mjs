@@ -106,8 +106,6 @@ fastify.put('/items/:id', async (request, reply) => {
     }
 })
 
-
-
 // Delete (DELETE)
 fastify.delete('/items/:id', async (request, reply) => {
     const params = {
@@ -137,9 +135,13 @@ const start = async () => {
     }
 }
 
-// Check if running locally or as a Lambda function
-if (esMain(import.meta)) {
+if (! process.env.AWS_LAMBDA_FUNCTION_NAME) {
     start()
 }
+
+// // Check if running locally or as a Lambda function
+// if (esMain(import.meta)) {
+//     start()
+// }
 
 export const handler = awsLambdaFastify(fastify)
