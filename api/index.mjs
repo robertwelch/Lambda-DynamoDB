@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 dotenv.config() // Load environment variables
 
-const fastify = Fastify()
+const fastify = Fastify({ logger: true })
 
 const client = new DynamoDBClient({
     region: process.env.AWS_REGION,
