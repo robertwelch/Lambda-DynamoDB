@@ -3,7 +3,7 @@ import { DynamoDBClient } from '@aws-sdk/client-dynamodb'
 import { DynamoDBDocumentClient, PutCommand, GetCommand, UpdateCommand, DeleteCommand, ScanCommand } from '@aws-sdk/lib-dynamodb'
 import dotenv from 'dotenv'
 import awsLambdaFastify from '@fastify/aws-lambda'
-import esMain from 'es-main'
+// import esMain from 'es-main'
 import { v4 as uuidv4 } from 'uuid'
 
 dotenv.config() // Load environment variables
@@ -127,8 +127,8 @@ fastify.delete('/items/:id', async (request, reply) => {
 // Start the server locally
 const start = async () => {
     try {
-        await fastify.listen({ host: '0.0.0.0', port: process.env.LOCAL_PORT || 3000 })
-        fastify.log.info(`Server listening on ${fastify.server.address().port}`)
+        await fastify.listen({ host: '0.0.0.0', port: process.env.LOCAL_PORT })
+        // fastify.log.info(`Server listening on ${fastify.server.address().port}`)
     } catch (err) {
         fastify.log.error(err)
         process.exit(1)

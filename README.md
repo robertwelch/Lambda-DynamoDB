@@ -80,14 +80,4 @@
 ## Testing locally
 1. Create a file named `api/.env`
 2. Add the same environment variables as your GitHub repository secrets
-3. i.e.:
-```
-AWS_ACCESS_KEY_ID=
-AWS_SECRET_ACCESS_KEY=
-AWS_REGION=
-DYNAMODB_TABLE_NAME=
-AWS_API_GATEWAY_URL=
-AWS_AUTHORIZATION_KEY=
-LAMBDA_API_NAME=
-LAMBDA_AUTHORIZER_NAME=
-```
+3. Copy api/env_example to api/.env
