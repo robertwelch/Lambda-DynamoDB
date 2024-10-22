@@ -19,7 +19,7 @@ jobs:
       - name: Run test locally
         run: |
           cd api
-          npm run start-and-test-local
+          npm run start-server-and-test
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

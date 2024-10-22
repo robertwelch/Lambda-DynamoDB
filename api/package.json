@@ -6,7 +6,7 @@
     "start": "dotenv -e .env node index.mjs",
     "test": "dotenv -e .env bash test.sh local",
     "test-remote": "dotenv -e .env bash test.sh remote",
-    "start-test": "dotenv -e .env start-server-and-test start http://127.0.0.1:4000/items test"
+    "start-server-and-test": "dotenv -e .env start-server-and-test start http://127.0.0.1:4000/items test"
   },
   "keywords": [],
   "author": "",
