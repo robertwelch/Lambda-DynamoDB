@@ -6,7 +6,7 @@
     "start": "node index.mjs",
     "test-local": "bash test.sh local",
     "test-remote": "bash test.sh remote",
-    "start-and-test-local": "start-server-and-test start http://localhost:8080/items test-local"
+    "start-and-test-local": "start-server-and-test start http://localhost:4000/items test-local"
   },
   "keywords": [],
   "author": "",
