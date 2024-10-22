@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "dotenv -e .env node index.mjs",
-    "test": "dotenv -e .env bash test.sh local",
-    "test-remote": "dotenv -e .env bash test.sh remote",
-    "start-server-and-test": "dotenv -e .env start-server-and-test start http://127.0.0.1:4000/items test"
+    "start": "node index.mjs",
+    "test": "bash test.sh local",
+    "test-remote": "bash test.sh remote",
+    "start-server-and-test": "node startAndTest.mjs"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +16,7 @@
     "@aws-sdk/client-dynamodb": "^3.675.0",
     "@aws-sdk/lib-dynamodb": "^3.675.0",
     "@fastify/aws-lambda": "^5.0.0",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
     "dotenv-cli": "^7.4.2",
     "es-main": "^1.3.0",

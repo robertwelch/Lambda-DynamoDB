@@ -3,14 +3,14 @@
 remote_local="$1"
 
 if [[ -f .env ]]; then
-  export $(cat .env | xargs)
+  export $(grep -v '^#' .env | xargs)
 fi
 
 if [[ "$remote_local" == "local" ]]; then
   Url="http://127.0.0.1:$LOCAL_PORT/items"
   Authorization="no-auth-necessary"
 elif [[ "$remote_local" == "remote" ]]; then
-  Url="$AWS_API_GATEWAY_URL"
+  Url="$AWS_API_GATEWAY_URL/items"
   Authorization="$AWS_AUTHORIZATION_KEY"
 else
   echo "ERROR: Must provide either 'remote' or 'local' as an argument"
