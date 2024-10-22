@@ -37,30 +37,28 @@
 4. Add integration
    1. Choose `Lambda`
    2. Find and select the new lambda function
-   3. API name: `Lambda-DynamoDB-LambdaAPI`
+   3. API name: `Lambda-DynamoDB-APIGateway`
 5. Configure routes
    1.  GET /items -> Lambda-DynamoDB-LambdaAPI (integration)
    2.  POST /items -> Lambda-DynamoDB-LambdaAPI (integration)
    3.  GET /items/{id} -> Lambda-DynamoDB-LambdaAPI (integration)
    4.  PUT /items/{id} -> Lambda-DynamoDB-LambdaAPI (integration)
    5.  DELETE /items/{id} -> Lambda-DynamoDB-LambdaAPI (integration)
-6.  Add authorizer
-	1. Navigate to `Authorization`
-	2. Open the tab named `Manage authorizers`
-	3. Click `Create`
-	4. Choose `Lambda`
-	5. Name: `Lambda-DynamoDB-LambdaAuthorizer`
-	6. Lambda function: `Lambda-DynamoDB-LambdaAuthorizer`
-	7. Click `Create`
-	8. Open the tab named `Attach authorizers to routes`
-	9. Click each route, select the authorizer we just created and click `Attach authorizer`
-7.  Stage name: `$default`
-8.  Click `Create`
-9.  Go to `API mappings`
-10. Click `Configure API mappings`
-11. Click `Add new mapping`
-12. Select this API and stage
-13. Click `Save`
+6.  Define stages
+    1.  Leave stage name = "$default"
+    2.  Leave "Auto-deploy" checked
+7.  Click Create
+
+## Add authorizer to API Gateway
+1. Navigate to `Authorization`
+2. Open the tab named `Manage authorizers`
+3. Click `Create`
+4. Choose `Lambda`
+5. Name: `Lambda-DynamoDB-LambdaAuthorizer`
+6. Lambda function: `Lambda-DynamoDB-LambdaAuthorizer`
+7. Click `Create`
+8. Open the tab named `Attach authorizers to routes`
+9. Click each route, select the authorizer we just created and click `Attach authorizer`
 
 ## Add GitHub Secrets
 1. AWS_ACCESS_KEY_ID
@@ -69,7 +67,8 @@
 4. AWS_API_GATEWAY_URL
 5. AWS_AUTHORIZATION_KEY
 6. DYNAMODB_TABLE_NAME
-7. LAMBDA_FUNCTION_NAME
+7. LAMBDA_API_NAME
+8. LAMBDA_AUTHORIZER_NAME
 
 ## Kickoff GitHub Actions workflow
 1. Navigate to your github repo actions
