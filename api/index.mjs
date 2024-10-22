@@ -135,7 +135,10 @@ const start = async () => {
     }
 }
 
-if (! process.env.AWS_LAMBDA_FUNCTION_NAME) {
+if (process.env.AWS_LAMBDA_FUNCTION_NAME) {
+    console.log("Running via lambda...")
+} else {
+    console.log("Running locally...")
     start()
 }
 

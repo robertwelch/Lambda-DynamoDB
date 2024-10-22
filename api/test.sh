@@ -3,7 +3,6 @@
 remote_local="$1"
 
 if [[ -f .env ]]; then
-  echo "Importing .env..."
   export $(cat .env | xargs)
 fi
 
