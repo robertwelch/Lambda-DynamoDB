@@ -29,6 +29,7 @@ jobs:
           AWS_AUTHORIZATION_KEY: ${{ secrets.AWS_AUTHORIZATION_KEY }}
           LAMBDA_API_NAME: ${{ secrets.LAMBDA_API_NAME }}
           LAMBDA_AUTHORIZER_NAME: ${{ secrets.LAMBDA_AUTHORIZER_NAME }}
+          LOCAL_PORT: 4000
 
       - name: Zip
         run: |

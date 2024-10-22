@@ -127,7 +127,7 @@ fastify.delete('/items/:id', async (request, reply) => {
 // Start the server locally
 const start = async () => {
     try {
-        await fastify.listen({ host: '0.0.0.0', port: 3000 })
+        await fastify.listen({ host: '0.0.0.0', port: process.env.LOCAL_PORT || 3000 })
         fastify.log.info(`Server listening on ${fastify.server.address().port}`)
     } catch (err) {
         fastify.log.error(err)

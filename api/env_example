@@ -6,3 +6,4 @@ AWS_API_GATEWAY_URL=
 AWS_AUTHORIZATION_KEY=
 LAMBDA_API_NAME=
 LAMBDA_AUTHORIZER_NAME=
+LOCAL_PORT= ## make sure to update package.json script as well

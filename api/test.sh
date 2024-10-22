@@ -7,7 +7,7 @@ if [[ -f .env ]]; then
 fi
 
 if [[ "$remote_local" == "local" ]]; then
-  Url="http://localhost:3000/items"
+  Url="http://localhost:$LOCAL_PORT/items"
   Authorization="no-auth-necessary"
 elif [[ "$remote_local" == "remote" ]]; then
   Url="$AWS_API_GATEWAY_URL"
