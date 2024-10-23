@@ -23,6 +23,17 @@ const scanItems = async () => {
     return data
 }
 
+const invalidScanItems = async () => {
+    const response = await fetch(`${apiUrl}`, {
+        headers: {
+            'Authorization': 'this-is-a-bad-authentication-key'
+        }
+    })
+    const data = await response.json()
+
+    return data
+}
+
 const createItem = async (item) => {
     const response = await fetch(apiUrl, {
         method: 'POST',
@@ -102,6 +113,13 @@ const testCrudOperations = async () => {
     const deleteResult = await deleteItem(createResult.id)
     console.log(deleteResult)
     console.log("-".repeat(80))
+
+    if (process.argv[2] && process.argv[2] === 'remote') {
+        console.log("Test invalid authentication key...")
+        let scanResult = await invalidScanItems()
+        console.log(scanResult)
+        console.log("-".repeat(80))
+    }
 }
 
 testCrudOperations().catch(console.error)
