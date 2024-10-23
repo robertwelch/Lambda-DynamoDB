@@ -6,10 +6,10 @@ let apiUrl, authorizationHeader
 
 if (process.argv[2] && process.argv[2] === 'remote') {
     apiUrl = process.env.AWS_API_GATEWAY_URL + '/items'
-    authorizationHeader = { 'Authorization': process.env.AWS_AUTHORIZATION_KEY }
+    authorizationHeader = { 'Authorization': process.env.LAMBDA_AUTHORIZER_KEY }
 } else {
     apiUrl = 'http://127.0.0.1:' + process.env.LOCAL_PORT + '/items'
-    authorizationHeader = 'no-auth-necessary'
+    authorizationHeader = { 'Authorization': 'no-auth-necessary' }
 }
 
 const scanItems = async () => {
