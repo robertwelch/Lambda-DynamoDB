@@ -86,12 +86,6 @@ const testCrudOperations = async () => {
     const createResult = await createItem(newItem)
     console.log(createResult)
     console.log("-".repeat(80))
-    console.log("-".repeat(80))
-
-    console.log("Scan again...")
-    scanResult = await scanItems()
-    console.log(scanResult)
-    console.log("-".repeat(80))
 
     console.log("Read...")
     const readResult = await readItem(createResult.id)
