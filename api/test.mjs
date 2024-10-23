@@ -20,6 +20,11 @@ const scanItems = async () => {
     })
     const data = await response.json()
 
+    if (response.status > 400) {
+        console.error(response)
+        throw new Error('Scan failed.')
+    }
+
     return data
 }
 
@@ -30,6 +35,11 @@ const invalidScanItems = async () => {
         }
     })
     const data = await response.json()
+
+    if (response.status < 400) {
+        console.error(response)
+        throw new Error('Scan failed.')
+    }
 
     return data
 }
@@ -45,6 +55,11 @@ const createItem = async (item) => {
     })
     const data = await response.json()
 
+    if (response.status > 400) {
+        console.error(response)
+        throw new Error('Create failed.')
+    }
+
     return data
 }
 
@@ -55,6 +70,11 @@ const readItem = async (id) => {
         }
     })
     const data = await response.json()
+
+    if (response.status > 400) {
+        console.error(response)
+        throw new Error('Read failed.')
+    }
 
     return data
 }
@@ -70,6 +90,11 @@ const updateItem = async (id, updatedItem) => {
     })
     const data = await response.json()
 
+    if (response.status > 400) {
+        console.error(response)
+        throw new Error('Read failed.')
+    }
+
     return data
 }
 
@@ -81,6 +106,11 @@ const deleteItem = async (id) => {
         }
     })
     const data = await response.json()
+
+    if (response.status > 400) {
+        console.error(response)
+        throw new Error('Read failed.')
+    }
 
     return data
 }
