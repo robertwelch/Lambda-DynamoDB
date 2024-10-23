@@ -1,7 +1,3 @@
-## Fork GitHub Repository
-1. Open `https://github.com/robertwelch/Lambda-DynamoDB`
-2. Click `Fork`
-
 ## Create DynamoDB Database
 1. Navigate to [DynamoDB dashboard](https://us-east-1.console.aws.amazon.com/dynamodbv2/home#service)
 2. Click `Create table`
@@ -60,14 +56,18 @@
 8. Open the tab named `Attach authorizers to routes`
 9. Click each route, select the authorizer we just created and click `Attach authorizer`
 
+## Fork GitHub Repository
+1. Open `https://github.com/robertwelch/Lambda-DynamoDB`
+2. Click `Fork`
+
 ## Add GitHub Secrets
-1. AWS_ACCESS_KEY_ID
-2. AWS_SECRET_ACCESS_KEY
+1. API_GATEWAY_URL
+2. AWS_ACCESS_KEY_ID
 3. AWS_REGION
-4. AWS_API_GATEWAY_URL
-5. AWS_AUTHORIZATION_KEY
-6. DYNAMODB_TABLE_NAME
-7. LAMBDA_API_NAME
+4. AWS_SECRET_ACCESS_KEY
+5. DYNAMODB_TABLE_NAME
+6. LAMBDA_API_NAME
+7. LAMBDA_AUTHORIZER_KEY
 8. LAMBDA_AUTHORIZER_NAME
 
 ## Kickoff GitHub Actions workflow
@@ -78,6 +78,5 @@
 5. This workflow will test locally using the AWS security credentials you provided in the secrets
 
 ## Testing locally
-1. Create a file named `api/.env`
-2. Add the same environment variables as your GitHub repository secrets
-3. Copy api/env_example to api/.env
+1. Copy api/env_example to api/.env
+2. Add the same environment variables as your GitHub repository secrets plus the LOCAL_PORT number.
