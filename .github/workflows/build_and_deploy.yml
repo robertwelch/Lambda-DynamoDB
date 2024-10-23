@@ -46,6 +46,10 @@ jobs:
           zip_file: api.zip
           environment: DYNAMODB_TABLE_NAME=${{ secrets.DYNAMODB_TABLE_NAME }}
       
+      - name: Sleep for 30s before testing
+        run: sleep 30s
+        shell: bash
+
       - name: Run test remotely
         run: |
           cd api
