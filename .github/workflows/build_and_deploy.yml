@@ -44,6 +44,7 @@ jobs:
           aws_region: ${{ secrets.AWS_REGION }}
           function_name: ${{ secrets.LAMBDA_API_NAME }}
           zip_file: api.zip
+          environment: DYNAMODB_TABLE_NAME=${{ secrets.DYNAMODB_TABLE_NAME }}
       
       - name: Run test remotely
         run: |

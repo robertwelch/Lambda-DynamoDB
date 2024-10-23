@@ -1,7 +1,7 @@
-import { config } from 'dotenv';
+import dotenv from 'dotenv';
 import { exec } from 'child_process';
 
-config();
+dotenv.config();
 
 const LOCAL_PORT = process.env.LOCAL_PORT;
 const command = `start-server-and-test start http://127.0.0.1:${LOCAL_PORT}/items test`;

@@ -8,32 +8,45 @@ import { v4 as uuidv4 } from 'uuid'
 
 dotenv.config() // Load environment variables
 
-const fastify = Fastify({ logger: true })
+// const fastify = Fastify({ logger: true })
+const fastify = Fastify()
 
-const client = new DynamoDBClient({
-    region: process.env.AWS_REGION,
-    credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-    }
-})
+let client
+
+if (process.env.AWS_LAMBDA_FUNCTION_NAME) {
+    client = new DynamoDBClient({ region: process.env.AWS_REGION })
+} else {
+    client = new DynamoDBClient({
+        region: process.env.AWS_REGION,
+        credentials: {
+            accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+        }
+    })
+}
 const ddbDocClient = DynamoDBDocumentClient.from(client)
 const tableName = process.env.DYNAMODB_TABLE_NAME
 
 // Create (POST)
 fastify.post('/items', async (request, reply) => {
     const data = request.body
-    const params = {
+    const newId = uuidv4() // Generate a UUID for the id
+
+    let params = {
         TableName: tableName,
         Item: {
-            id: uuidv4(), // Generate a UUID for the id
+            id: newId,
             ...data
         }
     }
 
     try {
         await ddbDocClient.send(new PutCommand(params))
-        reply.code(201).send({ message: 'Item created successfully' })
+        // reply.code(201).send(result)
+        reply.code(201).send({
+            message: 'Item created successfully',
+            id: newId
+        })
     } catch (error) {
         fastify.log.error(error)
         reply.code(500).send({ error: 'Could not create item' })
@@ -54,7 +67,10 @@ fastify.get('/items/:id', async (request, reply) => {
         reply.code(200).send(data.Item)
     } catch (error) {
         fastify.log.error(error)
-        reply.code(500).send({ error: 'Could not retrieve item' })
+        reply.code(500).send({
+            error: 'Could not retrieve item',
+            id: request.params.id
+        })
     }
 })
 
@@ -99,10 +115,16 @@ fastify.put('/items/:id', async (request, reply) => {
 
     try {
         const result = await ddbDocClient.send(new UpdateCommand(params))
-        reply.code(200).send(result.Attributes)
+        reply.code(200).send({
+            message: "Item updated successfully",
+            id: request.params.id
+        })
     } catch (error) {
         fastify.log.error(error)
-        reply.code(500).send({ error: 'Could not update item' })
+        reply.code(500).send({
+            error: 'Could not update item',
+            id: request.params.id
+        })
     }
 })
 
@@ -117,10 +139,16 @@ fastify.delete('/items/:id', async (request, reply) => {
 
     try {
         await ddbDocClient.send(new DeleteCommand(params))
-        reply.code(200).send({ message: 'Item deleted successfully' })
+        reply.code(200).send({
+            message: 'Item deleted successfully',
+            id: request.params.id
+        })
     } catch (error) {
         fastify.log.error(error)
-        reply.code(500).send({ error: 'Could not delete item' })
+        reply.code(500).send({
+            error: 'Could not delete item',
+            id: request.params.id
+        })
     }
 })
 
