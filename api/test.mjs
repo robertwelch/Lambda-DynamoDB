@@ -77,7 +77,7 @@ const deleteItem = async (id) => {
 const testCrudOperations = async () => {
     console.log("-".repeat(80))
     console.log("Scan...")
-    const scanResult = await scanItems()
+    let scanResult = await scanItems()
     console.log(scanResult)
     console.log("-".repeat(80))
 
@@ -85,6 +85,12 @@ const testCrudOperations = async () => {
     const newItem = { name: 'Test Item', value: '123' }
     const createResult = await createItem(newItem)
     console.log(createResult)
+    console.log("-".repeat(80))
+    console.log("-".repeat(80))
+
+    console.log("Scan again...")
+    scanResult = await scanItems()
+    console.log(scanResult)
     console.log("-".repeat(80))
 
     console.log("Read...")
