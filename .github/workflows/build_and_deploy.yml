@@ -25,7 +25,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
           DYNAMODB_TABLE_NAME: ${{ secrets.DYNAMODB_TABLE_NAME }}
-          AWS_API_GATEWAY_URL: ${{ secrets.AWS_API_GATEWAY_URL }}
+          API_GATEWAY_URL: ${{ secrets.API_GATEWAY_URL }}
           LAMBDA_AUTHORIZER_KEY: ${{ secrets.LAMBDA_AUTHORIZER_KEY }}
           LAMBDA_API_NAME: ${{ secrets.LAMBDA_API_NAME }}
           LAMBDA_AUTHORIZER_NAME: ${{ secrets.LAMBDA_AUTHORIZER_NAME }}
@@ -59,7 +59,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
           DYNAMODB_TABLE_NAME: ${{ secrets.DYNAMODB_TABLE_NAME }}
-          AWS_API_GATEWAY_URL: ${{ secrets.AWS_API_GATEWAY_URL }}
+          API_GATEWAY_URL: ${{ secrets.API_GATEWAY_URL }}
           LAMBDA_AUTHORIZER_KEY: ${{ secrets.LAMBDA_AUTHORIZER_KEY }}
           LAMBDA_API_NAME: ${{ secrets.LAMBDA_API_NAME }}
           LAMBDA_AUTHORIZER_NAME: ${{ secrets.LAMBDA_AUTHORIZER_NAME }}

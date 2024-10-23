@@ -5,7 +5,7 @@ dotenv.config()
 let apiUrl, authorizationHeader
 
 if (process.argv[2] && process.argv[2] === 'remote') {
-    apiUrl = process.env.AWS_API_GATEWAY_URL + '/items'
+    apiUrl = process.env.API_GATEWAY_URL + '/items'
     authorizationHeader = { 'Authorization': process.env.LAMBDA_AUTHORIZER_KEY }
 } else {
     apiUrl = 'http://127.0.0.1:' + process.env.LOCAL_PORT + '/items'
